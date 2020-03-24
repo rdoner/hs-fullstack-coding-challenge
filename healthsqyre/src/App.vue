@@ -10,10 +10,13 @@
       </div>
       <ul class="container">
         <li class="item" v-for="item in sortedItems" :key="item.id">
-          <h1>{{ item.name }}</h1>
-          <p>{{ item.vendor.name }}</p>
-          <p class="price">${{ item.price }}</p>
-          <p class="desc" v-html="item.description"></p>
+          <img src="./assets/cpap.jpg" alt="CPAP machine" />
+          <div class="text">
+            <h1>{{ item.name }}</h1>
+            <p>{{ item.vendor.name }}</p>
+            <p class="price">${{ item.price }}</p>
+            <p class="desc" v-html="item.description"></p>
+          </div>
         </li>
       </ul>
     </main>
@@ -59,7 +62,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Sen', sans-serif;
+  font-family: "Sen", sans-serif;
   color: white;
 }
 
@@ -80,10 +83,18 @@ header {
 
 .item {
   box-sizing: border-box;
-  padding: 2rem;
   margin: 1rem;
   text-align: center;
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.text {
+  padding: 2rem;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
 }
 
 @media only screen and (min-width: 480px) {
