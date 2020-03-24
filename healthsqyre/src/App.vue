@@ -1,17 +1,22 @@
 <template>
   <div>
-    <button v-if=sortedByPrice @click="sortedByPrice = !sortedByPrice">Sort By Id</button>
-    <button v-else @click="sortedByPrice = !sortedByPrice">Sort By Price</button>
-    <!-- <button @click="sorting *= -1">Toggle order</button> -->
-    <ul>
-      <li v-for="item in sortedItems" :key="item.id">
-        <h1>{{ item.id }}</h1>
-        <h1>{{ item.name }}</h1>
-        <h2>{{ item.vendor.name }}</h2>
-        <h2>${{ item.price }}</h2>
-        <h2 v-html="item.description"></h2>
-      </li>
-    </ul>
+    <header>
+      <h1>HEALTHSQYRE</h1>
+    </header>
+    <main>
+      <div class="sort-btn">
+        <button v-if="sortedByPrice" @click="sortedByPrice = !sortedByPrice">Sort By Id</button>
+        <button v-else @click="sortedByPrice = !sortedByPrice">Sort By Price</button>
+      </div>
+      <ul class="container">
+        <li class="item" v-for="item in sortedItems" :key="item.id">
+          <h1>{{ item.name }}</h1>
+          <p>{{ item.vendor.name }}</p>
+          <p class="price">${{ item.price }}</p>
+          <p class="desc" v-html="item.description"></p>
+        </li>
+      </ul>
+    </main>
   </div>
 </template>
 
@@ -19,18 +24,6 @@
 import { DATA } from "../data.const";
 export default {
   name: "App",
-  // data() {
-  //   // const sortedById = DATA.sort((a, b) => {
-  //   //     return a.id - b.id;
-  //   //   })
-  //   // const sortedByPrice = DATA.sort((a, b) => {
-  //   //     return a.price - b.price;
-  //   //   })
-  //   return {
-  //     items: DATA
-  //   };
-  // },
-
   data: () => ({
     sortedByPrice: false
   }),
@@ -43,10 +36,10 @@ export default {
       } else {
         return DATA.sort((a, b) => {
           return a.id - b.id;
-        })
+        });
       }
     }
-  },
+  }
 };
 </script>
 
@@ -58,5 +51,62 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+header {
+  height: 100px;
+  background-color: rgb(0, 89, 96);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Sen', sans-serif;
+  color: white;
+}
+
+.sort-btn {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  height: auto;
+  justify-content: space-evenly;
+  list-style-type: none;
+  padding: 0;
+}
+
+.item {
+  box-sizing: border-box;
+  padding: 2rem;
+  margin: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+@media only screen and (min-width: 480px) {
+  .item {
+    max-width: 100%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .item {
+    max-width: 45%;
+  }
+}
+@media only screen and (min-width: 1000px) {
+  .item {
+    max-width: 30%;
+  }
+}
+
+.price {
+  color: green;
+}
+.desc {
+  text-align: left;
 }
 </style>
